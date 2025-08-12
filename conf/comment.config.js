@@ -21,7 +21,7 @@ module.exports = {
     process.env.NEXT_PUBLIC_COMMENT_TWIKOO_COUNT_ENABLE || false, // 博客列表是否显示评论数
   COMMENT_TWIKOO_CDN_URL:
     process.env.NEXT_PUBLIC_COMMENT_TWIKOO_CDN_URL ||
-    'https://s4.zstatic.net/npm/twikoo@1.6.44/dist/twikoo.min.js', // twikoo客户端cdn
+    'https://cdn.staticfile.net/twikoo/1.6.17/twikoo.min.js', // twikoo客户端cdn
 
   // utterance
   COMMENT_UTTERRANCES_REPO:
@@ -97,5 +97,7 @@ module.exports = {
     process.env.NEXT_PUBLIC_WEBMENTION_HOSTNAME || '',
   COMMENT_WEBMENTION_TWITTER_USERNAME:
     process.env.NEXT_PUBLIC_TWITTER_USERNAME || '',
-  COMMENT_WEBMENTION_TOKEN: process.env.NEXT_PUBLIC_WEBMENTION_TOKEN || ''
+  COMMENT_WEBMENTION_TOKEN: process.env.NEXT_PUBLIC_WEBMENTION_TOKEN || '',
+
+  // <---- 评论插件
 }

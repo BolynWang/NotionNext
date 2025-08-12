@@ -104,7 +104,7 @@ const LayoutBase = props => {
       {/* 主区块 */}
       <main
         id='wrapper-outer'
-        className={`flex-grow w-full ${maxWidth} mx-auto relative md:px-5`}>
+        className={`flex-grow w-full ${maxWidth} mx-auto relative px-1 md:px-1 lg:px-1 xl:px-1`}>
         <div
           id='container-inner'
           className={`${HEO_HERO_BODY_REVERSE ? 'flex-row-reverse' : ''} w-full mx-auto lg:flex justify-center relative z-10`}>
@@ -293,12 +293,12 @@ const LayoutSlug = props => {
   return (
     <>
       <div
-        className={`article h-full w-full ${fullWidth ? '' : 'xl:max-w-5xl'} ${hasCode ? 'xl:w-[73.15vw]' : ''}  bg-white dark:bg-[#18171d] dark:border-gray-600 lg:hover:shadow lg:border rounded-2xl lg:px-2 lg:py-4 `}>
+        className={`article h-full w-full ${fullWidth ? '' : 'md:max-w-4xl lg:max-w-5xl xl:max-w-3xl'} ${hasCode ? 'md:w-[80vw] lg:w-[75vw] xl:w-[65vw]' : ''}  bg-white dark:bg-[#18171d] dark:border-gray-600 lg:hover:shadow lg:border rounded-2xl lg:px-2 lg:py-4 `}>
         {/* 文章锁 */}
         {lock && <PostLock validPassword={validPassword} />}
 
         {!lock && post && (
-          <div className='mx-auto md:w-full md:px-5'>
+          <div className='mx-auto md:w-full px-1 md:px-1 lg:px-1'>
             {/* 文章主体 */}
             <article
               id='article-wrapper'
@@ -306,7 +306,7 @@ const LayoutSlug = props => {
               itemType='https://schema.org/Movie'>
               {/* Notion文章主体 */}
               <section
-                className='wow fadeInUp p-5 justify-center mx-auto'
+                className='wow fadeInUp p-6 justify-center mx-auto max-w-4xl'
                 data-wow-delay='.2s'>
                 <ArticleExpirationNotice post={post} />
                 <AISummary aiSummary={post.aiSummary} />

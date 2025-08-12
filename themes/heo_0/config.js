@@ -1,15 +1,19 @@
+import { TURBO_TRACE_DEFAULT_MEMORY_LIMIT } from "next/dist/shared/lib/constants"
+
 const CONFIG = {
-  HEO_HOME_POST_TWO_COLS: true, // 首页博客两列显示，若为false则只显示一列
+  HEO_HOME_POST_TWO_COLS: false, // 首页博客两列显示，若为false则只显示一列
   HEO_LOADING_COVER: true, // 页面加载的遮罩动画
 
   HEO_HOME_BANNER_ENABLE: true,
 
-  HEO_SITE_CREATE_TIME: '2021-09-21', // 建站日期，用于计算网站运行的第几天
+  HEO_HERO_TODAY_CARD_ENABLE: false, // 英雄区右侧"记录我，遇见你！故事从这里开始。"卡片显示开关
+
+  HEO_SITE_CREATE_TIME: '2021-08-23', // 建站日期，用于计算网站运行的第几天
 
   // 首页顶部通知条滚动内容，如不需要可以留空 []
   HEO_NOTICE_BAR: [
     { title: 'AIGC，互联网营销，新兴科技分享！', url: 'https://wbolyn.com' },
-    { title: '个人微信bolyn000，期待与你有更多的交流。', url: 'https://wbolyn.com' }
+    { title: '个人微信bolyn000，期待与你有更多的交流。', url: 'https://wangjiazan.com' }
   ],
 
   // 英雄区左右侧组件颠倒位置
@@ -37,7 +41,7 @@ const CONFIG = {
   HEO_HERO_RECOMMEND_POST_SORT_BY_UPDATE_TIME: false, // 推荐文章排序，为`true`时将强制按最后修改时间倒序
   //   HERO_RECOMMEND_COVER: 'https://cdn.pixabay.com/photo/2015/10/30/20/13/sunrise-1014712_1280.jpg', // 英雄区右侧图片
 
-// 右侧个人资料卡牌欢迎语，点击可自动切换
+  // 右侧个人资料卡牌欢迎语，点击可自动切换
   HEO_INFOCARD_GREETINGS: [
     '你好！我是',
     '分享与热心帮助',
@@ -53,7 +57,7 @@ const CONFIG = {
   HEO_INFO_CARD_ICON1: 'fas fa-user',
   HEO_INFO_CARD_URL2: 'https://wbolyn.com/',
   HEO_INFO_CARD_ICON2: 'fab fa-github',
-  HEO_INFO_CARD_URL3: 'https://github.com/BolynWang',
+  HEO_INFO_CARD_URL3: 'https://github.com/JiazanWang',
   HEO_INFO_CARD_TEXT3: '了解更多',
 
   // 用户技能图标
@@ -169,7 +173,7 @@ const CONFIG = {
   HEO_MENU_SEARCH: true, // 显示搜索
 
   HEO_POST_LIST_COVER: true, // 列表显示文章封面
-  HEO_POST_LIST_COVER_HOVER_ENLARGE: true, // 列表鼠标悬停放大
+  HEO_POST_LIST_COVER_HOVER_ENLARGE: false, // 列表鼠标悬停放大
 
   HEO_POST_LIST_COVER_DEFAULT: true, // 封面为空时用站点背景做默认封面
   HEO_POST_LIST_SUMMARY: true, // 文章摘要
@@ -178,7 +182,6 @@ const CONFIG = {
 
   HEO_ARTICLE_ADJACENT: true, // 显示上一篇下一篇文章推荐
   HEO_ARTICLE_COPYRIGHT: true, // 显示文章版权声明
-  HEO_ARTICLE_NOT_BY_AI: false, // 显示非AI写作
   HEO_ARTICLE_RECOMMEND: true, // 文章关联推荐
 
   HEO_WIDGET_LATEST_POSTS: true, // 显示最新文章卡

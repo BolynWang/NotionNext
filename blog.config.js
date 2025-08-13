@@ -4,7 +4,7 @@ const BLOG = {
   // Important page_id！！！Duplicate Template from  https://www.notion.so/tanghh/02ab3b8678004aa69e9e415905ef32a5
   NOTION_PAGE_ID:
     process.env.NOTION_PAGE_ID ||
-    '10aa91b58f6680c081fec187f5dce484, weekly:223a91b58f66803caccccd6da29c40d1', // Replace with your notion page id
+    '10aa91b58f6680c081fec187f5dce484,weekly:223a91b58f66803caccccd6da29c40d1', // Replace with your notion page id
     //'223a91b58f66803caccccd6da29c40d1', //这个是测试的时候使用的
   THEME: process.env.NEXT_PUBLIC_THEME || 'heo', // 当前主题，在themes文件夹下可找到所有支持的主题；主题名称就是文件夹名，例如 example,fukasawa,gitbook,heo,hexo,landing,matery,medium,next,nobelium,plog,simple
   LANG: process.env.NEXT_PUBLIC_LANG || 'zh-CN', // e.g 'zh-CN','en-US'  see /lib/lang.js for more.

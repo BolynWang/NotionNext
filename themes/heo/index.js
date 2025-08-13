@@ -104,7 +104,7 @@ const LayoutBase = props => {
       {/* 主区块 */}
       <main
         id='wrapper-outer'
-        className={`flex-grow w-full ${maxWidth} mx-auto relative px-1 md:px-1 lg:px-1 xl:px-1`}>
+        className={`flex-grow w-full ${maxWidth} mx-auto relative px-5 md:px-5 lg:px-5 xl:px-5`}>
         <div
           id='container-inner'
           className={`${HEO_HERO_BODY_REVERSE ? 'flex-row-reverse' : ''} w-full mx-auto lg:flex justify-center relative z-10`}>
@@ -138,8 +138,8 @@ const LayoutBase = props => {
  * @returns
  */
 const LayoutIndex = props => {
-  return (
-    <div id='post-outer-wrapper' className='px-5 md:px-0'>
+    return (
+      <div id='post-outer-wrapper' className='px-0 md:px-0'>
       {/* 文章分类条 */}
       <CategoryBar {...props} />
       {siteConfig('POST_LIST_STYLE') === 'page' ? (
@@ -158,7 +158,7 @@ const LayoutIndex = props => {
  */
 const LayoutPostList = props => {
   return (
-    <div id='post-outer-wrapper' className='px-5  md:px-0'>
+    <div id='post-outer-wrapper' className='px-0 md:px-0'>
       {/* 文章分类条 */}
       <CategoryBar {...props} />
       {siteConfig('POST_LIST_STYLE') === 'page' ? (
@@ -197,7 +197,7 @@ const LayoutSearch = props => {
   }, [])
   return (
     <div currentSearch={currentSearch}>
-      <div id='post-outer-wrapper' className='px-5  md:px-0'>
+      <div id='post-outer-wrapper' className='px-0 md:px-0'>
         {!currentSearch ? (
           <SearchNav {...props} />
         ) : (

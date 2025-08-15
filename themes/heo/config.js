@@ -29,7 +29,7 @@ const CONFIG = {
   HEO_HERO_COVER_TITLE: '随机漫步',
 
   // 英雄区显示三个置顶分类
-  HEO_HERO_CATEGORY_1: { title: '博霖周刊', url: 'https://quaily.com/bolyn' },
+  HEO_HERO_CATEGORY_1: { title: '博霖周刊', url: 'https://weekly.wbolyn.com/' },
   HEO_HERO_CATEGORY_2: { title: '热门文章', url: '/tag/热门文章' },
   HEO_HERO_CATEGORY_3: { title: '实用教程', url: '/tag/实用教程' },
 

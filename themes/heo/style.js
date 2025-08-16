@@ -61,6 +61,19 @@ const Style = () => {
           transform: translateX(-50%);
         }
       }
+
+      // 增加段落间距
+      .notion-text {
+        margin: 8px 0 !important;
+      }
+
+      .notion,
+      .notion-text,
+      .notion-quote,
+      .notion-h-title {
+        margin-top: 0.55rem !important;
+        margin-bottom: 0.55rem !important;
+      }
     `}</style>
   )
 }

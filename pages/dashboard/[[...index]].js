@@ -20,21 +20,29 @@ const Dashboard = props => {
 }
 
 export async function getStaticProps({ locale }) {
-  const prefix = 'dashboard'
-  const props = await resolvePostProps({
-    prefix,
-    locale,
-  })
+  try {
+    const prefix = 'dashboard'
+    const props = await resolvePostProps({
+      prefix,
+      locale,
+    })
 
-  return {
-    props,
-    revalidate: process.env.EXPORT
-      ? undefined
-      : siteConfig(
-        'NEXT_REVALIDATE_SECOND',
-        BLOG.NEXT_REVALIDATE_SECOND,
-        props.NOTION_CONFIG
-      )
+    return {
+      props,
+      revalidate: process.env.EXPORT
+        ? undefined
+        : siteConfig(
+          'NEXT_REVALIDATE_SECOND',
+          BLOG.NEXT_REVALIDATE_SECOND,
+          props.NOTION_CONFIG
+        )
+    }
+  } catch (error) {
+    console.error('[getStaticProps] Error for /dashboard:', error)
+    return {
+      props: { post: null, NOTION_CONFIG: {} },
+      notFound: true
+    }
   }
 }
 

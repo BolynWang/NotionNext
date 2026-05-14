@@ -128,21 +128,29 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params: { prefix }, locale }) {
-  const props = await resolvePostProps({
-    prefix,
-    locale,
-  })
+  try {
+    const props = await resolvePostProps({
+      prefix,
+      locale,
+    })
 
-  return {
-    props,
-    revalidate: isExport()
-      ? undefined
-      : siteConfig(
-        'NEXT_REVALIDATE_SECOND',
-        BLOG.NEXT_REVALIDATE_SECOND,
-        props.NOTION_CONFIG
-      ),
-    notFound: !props.post
+    return {
+      props,
+      revalidate: isExport()
+        ? undefined
+        : siteConfig(
+          'NEXT_REVALIDATE_SECOND',
+          BLOG.NEXT_REVALIDATE_SECOND,
+          props.NOTION_CONFIG
+        ),
+      notFound: !props.post
+    }
+  } catch (error) {
+    console.error(`[getStaticProps] Error for /${prefix}:`, error)
+    return {
+      props: { post: null, NOTION_CONFIG: {} },
+      notFound: true
+    }
   }
 }
 

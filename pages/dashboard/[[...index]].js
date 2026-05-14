@@ -1,7 +1,6 @@
 import BLOG from '@/blog.config'
 import { siteConfig } from '@/lib/config'
 import { resolvePostProps } from '@/lib/db/SiteDataApi'
-import { isExport } from '@/lib/utils/buildMode'
 import { DynamicLayout } from '@/themes/theme'
 import PropTypes from 'prop-types'
 
@@ -30,7 +29,7 @@ export async function getStaticProps({ locale }) {
 
     return {
       props,
-      revalidate: isExport()
+      revalidate: process.env.EXPORT
         ? undefined
         : siteConfig(
           'NEXT_REVALIDATE_SECOND',

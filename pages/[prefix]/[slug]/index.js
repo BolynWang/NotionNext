@@ -39,7 +39,7 @@ export async function getStaticProps({ params: { prefix, slug }, locale }) {
 
     return {
       props,
-      revalidate: isExport()
+      revalidate: process.env.EXPORT
         ? undefined
         : siteConfig(
           'NEXT_REVALIDATE_SECOND',

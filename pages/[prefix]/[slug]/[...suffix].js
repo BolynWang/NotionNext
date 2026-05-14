@@ -4,7 +4,6 @@ import { resolvePostProps } from '@/lib/db/SiteDataApi'
 import { getStaticPathsBase } from '@/lib/build/staticPaths'
 import { isExport } from '@/lib/utils/buildMode'
 import { checkSlugHasMorThanTwoSlash } from '@/lib/utils/post'
-import { isExport } from '@/lib/utils/buildMode'
 import Slug from '..'
 
 /**
@@ -51,7 +50,7 @@ export async function getStaticProps({
 
     return {
       props,
-      revalidate: isExport()
+      revalidate: process.env.EXPORT
         ? undefined
         : siteConfig(
           'NEXT_REVALIDATE_SECOND',

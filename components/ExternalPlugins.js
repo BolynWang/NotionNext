@@ -8,6 +8,7 @@ import { GlobalStyle } from './GlobalStyle'
 import { initGoogleAdsense } from './GoogleAdsense'
 
 import Head from 'next/head'
+import Script from 'next/script'
 import ExternalScript from './ExternalScript'
 import WebWhiz from './Webwhiz'
 import { useGlobal } from '@/lib/global'
@@ -182,10 +183,9 @@ const ExternalPlugin = props => {
     // 执行注入脚本
     // eslint-disable-next-line no-eval
     if (GLOBAL_JS && GLOBAL_JS.trim() !== '') {
-      // console.log('Inject JS:', GLOBAL_JS);
+      eval(GLOBAL_JS)
     }
-    eval(GLOBAL_JS)
-  })
+  }, [])
 
   if (DISABLE_PLUGIN) {
     return null
@@ -225,100 +225,86 @@ const ExternalPlugin = props => {
       {COZE_BOT_ID && <Coze />}
 
       {ANALYTICS_51LA_ID && ANALYTICS_51LA_CK && (
-        <>
-          <script id='LA_COLLECT' src='//sdk.51.la/js-sdk-pro.min.js' defer />
-          {/* <script async dangerouslySetInnerHTML={{
-              __html: `
-                    LA.init({id:"${ANALYTICS_51LA_ID}",ck:"${ANALYTICS_51LA_CK}",hashMode:true,autoTrack:true})
-                    `
-            }} /> */}
-        </>
+        <Script
+          id='LA_COLLECT'
+          src='//sdk.51.la/js-sdk-pro.min.js'
+          strategy='lazyOnload'
+        />
       )}
 
       {CHATBASE_ID && (
         <>
-          <script
+          <Script
             id={CHATBASE_ID}
             src='https://www.chatbase.co/embed.min.js'
-            defer
+            strategy='lazyOnload'
           />
-          <script
-            async
-            dangerouslySetInnerHTML={{
-              __html: `
-                    window.chatbaseConfig = {
-                        chatbotId: "${CHATBASE_ID}",
-                        }
-                    `
-            }}
-          />
+          <Script
+            id='chatbase-config'
+            strategy='lazyOnload'
+          >{`
+            window.chatbaseConfig = {
+              chatbotId: "${CHATBASE_ID}"
+            }
+          `}</Script>
         </>
       )}
 
       {CLARITY_ID && (
-        <>
-          <script
-            async
-            dangerouslySetInnerHTML={{
-              __html: `
-                (function(c, l, a, r, i, t, y) {
-                  c[a] = c[a] || function() {
-                    (c[a].q = c[a].q || []).push(arguments);
-                  };
-                  t = l.createElement(r);
-                  t.async = 1;
-                  t.src = "https://www.clarity.ms/tag/" + i;
-                  y = l.getElementsByTagName(r)[0];
-                  if (y && y.parentNode) {
-                    y.parentNode.insertBefore(t, y);
-                  } else {
-                    l.head.appendChild(t);
-                  }
-                })(window, document, "clarity", "script", "${CLARITY_ID}");
-                `
-            }}
-          />
-        </>
+        <Script
+          id='clarity-script'
+          strategy='lazyOnload'
+        >{`
+          (function(c, l, a, r, i, t, y) {
+            c[a] = c[a] || function() {
+              (c[a].q = c[a].q || []).push(arguments);
+            };
+            t = l.createElement(r);
+            t.async = 1;
+            t.src = "https://www.clarity.ms/tag/" + i;
+            y = l.getElementsByTagName(r)[0];
+            if (y && y.parentNode) {
+              y.parentNode.insertBefore(t, y);
+            } else {
+              l.head.appendChild(t);
+            }
+          })(window, document, "clarity", "script", "${CLARITY_ID}");
+        `}</Script>
       )}
 
       {COMMENT_DAO_VOICE_ID && (
         <>
-          {/* DaoVoice 反馈 */}
-          <script
-            async
-            dangerouslySetInnerHTML={{
-              __html: `
-                (function(i, s, o, g, r, a, m) {
-                  i["DaoVoiceObject"] = r;
-                  i[r] = i[r] || function() {
-                    (i[r].q = i[r].q || []).push(arguments);
-                  };
-                  i[r].l = 1 * new Date();
-                  a = s.createElement(o);
-                  m = s.getElementsByTagName(o)[0];
-                  a.async = 1;
-                  a.src = g;
-                  a.charset = "utf-8";
-                  if (m && m.parentNode) {
-                    m.parentNode.insertBefore(a, m);
-                  } else {
-                    s.head.appendChild(a);
-                  }
-                })(window, document, "script", ('https:' == document.location.protocol ? 'https:' : 'http:') + "//widget.daovoice.io/widget/daf1a94b.js", "daovoice")
-                `
-            }}
-          />
-          <script
-            async
-            dangerouslySetInnerHTML={{
-              __html: `
-             daovoice('init', {
-                app_id: "${COMMENT_DAO_VOICE_ID}"
-              });
-              daovoice('update');
-              `
-            }}
-          />
+          <Script
+            id='daovoice-script'
+            strategy='lazyOnload'
+          >{`
+            (function(i, s, o, g, r, a, m) {
+              i["DaoVoiceObject"] = r;
+              i[r] = i[r] || function() {
+                (i[r].q = i[r].q || []).push(arguments);
+              };
+              i[r].l = 1 * new Date();
+              a = s.createElement(o);
+              m = s.getElementsByTagName(o)[0];
+              a.async = 1;
+              a.src = g;
+              a.charset = "utf-8";
+              if (m && m.parentNode) {
+                m.parentNode.insertBefore(a, m);
+              } else {
+                s.head.appendChild(a);
+              }
+            })(window, document, "script", ('https:' == document.location.protocol ? 'https:' : 'http:') + "//widget.daovoice.io/widget/daf1a94b.js", "daovoice")
+          `}</Script>
+          <Script
+            id='daovoice-init'
+            strategy='lazyOnload'
+          >{`
+            daovoice('init', {
+              app_id: "${COMMENT_DAO_VOICE_ID}"
+            });
+            daovoice('update');
+          `}</Script>
         </>
       )}
 
@@ -342,112 +328,111 @@ const ExternalPlugin = props => {
         </>
       )}
 
-      {/* {COMMENT_TWIKOO_ENV_ID && <script defer src={COMMENT_TWIKOO_CDN_URL} />} */}
+      {/* {COMMENT_TWIKOO_ENV_ID && <Script defer src={COMMENT_TWIKOO_CDN_URL} />} */}
 
-      {COMMENT_ARTALK_SERVER && <script defer src={COMMENT_ARTALK_JS} />}
+      {COMMENT_ARTALK_SERVER && (
+        <Script src={COMMENT_ARTALK_JS} strategy='lazyOnload' />
+      )}
 
       {COMMENT_TIDIO_ID && (
-        <script async src={`//code.tidio.co/${COMMENT_TIDIO_ID}.js`} />
+        <Script
+          src={`//code.tidio.co/${COMMENT_TIDIO_ID}.js`}
+          strategy='lazyOnload'
+        />
       )}
 
       {/* gitter聊天室 */}
       {COMMENT_GITTER_ROOM && (
         <>
-          <script
+          <Script
             src='https://sidecar.gitter.im/dist/sidecar.v1.js'
-            async
-            defer
+            strategy='lazyOnload'
           />
-          <script
-            async
-            dangerouslySetInnerHTML={{
-              __html: `
+          <Script
+            id='gitter-options'
+            strategy='lazyOnload'
+          >{`
             ((window.gitter = {}).chat = {}).options = {
               room: '${COMMENT_GITTER_ROOM}'
             };
-            `
-            }}
-          />
+          `}</Script>
         </>
       )}
 
       {/* 百度统计 */}
       {ANALYTICS_BAIDU_ID && (
-        <script
-          async
-          dangerouslySetInnerHTML={{
-            __html: `
+        <Script
+          id='baidu-analytics'
+          strategy='lazyOnload'
+        >{`
           var _hmt = _hmt || [];
           (function() {
             var hm = document.createElement("script");
             hm.src = "https://hm.baidu.com/hm.js?${ANALYTICS_BAIDU_ID}";
-            var s = document.getElementsByTagName("script")[0]; 
+            var s = document.getElementsByTagName("script")[0];
             s.parentNode.insertBefore(hm, s);
           })();
-          `
-          }}
-        />
+        `}</Script>
       )}
 
       {/* 站长统计 */}
       {ANALYTICS_CNZZ_ID && (
-        <script
-          async
+        <Script
+          id='cnzz-analytics'
+          strategy='lazyOnload'
           dangerouslySetInnerHTML={{
-            __html: `
-          document.write(unescape("%3Cspan style='display:none' id='cnzz_stat_icon_${ANALYTICS_CNZZ_ID}'%3E%3C/span%3E%3Cscript src='https://s9.cnzz.com/z_stat.php%3Fid%3D${ANALYTICS_CNZZ_ID}' type='text/javascript'%3E%3C/script%3E"));
-          `
+            __html: `document.write(unescape("%3Cspan style='display:none' id='cnzz_stat_icon_${ANALYTICS_CNZZ_ID}'%3E%3C/span%3E%3Cscript src='https://s9.cnzz.com/z_stat.php%3Fid%3D${ANALYTICS_CNZZ_ID}' type='text/javascript'%3E%3C/script%3E"));`
           }}
         />
       )}
 
       {/* UMAMI 统计 */}
       {UMAMI_ID && (
-        <script async defer src={UMAMI_HOST} data-website-id={UMAMI_ID}></script>
+        <Script
+          src={UMAMI_HOST}
+          data-website-id={UMAMI_ID}
+          strategy='lazyOnload'
+        />
       )}
 
       {/* 谷歌统计 */}
       {ANALYTICS_GOOGLE_ID && (
         <>
-          <script
-            async
+          <Script
             src={`https://www.googletagmanager.com/gtag/js?id=${ANALYTICS_GOOGLE_ID}`}
+            strategy='lazyOnload'
           />
-          <script
-            async
-            dangerouslySetInnerHTML={{
-              __html: `
-                window.dataLayer = window.dataLayer || [];
-                function gtag(){dataLayer.push(arguments);}
-                gtag('js', new Date());
-                gtag('config', '${ANALYTICS_GOOGLE_ID}', {
-                  page_path: window.location.pathname,
-                });
-              `
-            }}
-          />
+          <Script
+            id='gtag-config'
+            strategy='lazyOnload'
+          >{`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${ANALYTICS_GOOGLE_ID}', {
+              page_path: window.location.pathname,
+            });
+          `}</Script>
         </>
       )}
 
       {/* Matomo 统计 */}
       {MATOMO_HOST_URL && MATOMO_SITE_ID && (
-        <script
-          async
-          dangerouslySetInnerHTML={{
-            __html: `
-              var _paq = window._paq = window._paq || [];
-              _paq.push(['trackPageView']);
-              _paq.push(['enableLinkTracking']);
-              (function() {
-                var u="//${MATOMO_HOST_URL}/";
-                _paq.push(['setTrackerUrl', u+'matomo.php']);
-                _paq.push(['setSiteId', '${MATOMO_SITE_ID}']);
-                var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
-                g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
-              })();
-            `
-          }}
-        />
+        <Script
+          id='matomo-script'
+          strategy='lazyOnload'
+        >{`
+          var _paq = window._paq = window._paq || [];
+          _paq.push(['trackPageView']);
+          _paq.push(['enableLinkTracking']);
+          (function() {
+            var u="//${MATOMO_HOST_URL}/";
+            _paq.push(['setTrackerUrl', u+'matomo.php']);
+            _paq.push(['setSiteId', '${MATOMO_SITE_ID}']);
+            var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+            g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+          })();
+        `}</Script>
       )}
     </>
   )

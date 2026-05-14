@@ -11,6 +11,7 @@ import {
   sha256Digest
 } from '@/lib/utils/password'
 import { checkSlugHasNoSlash } from '@/lib/utils/post'
+import { isExport } from '@/lib/utils/buildMode'
 import { DynamicLayout } from '@/themes/theme'
 import md5 from 'js-md5'
 import { useRouter } from 'next/router'

@@ -31,7 +31,7 @@ const CONFIG = {
   // 英雄区显示三个置顶分类
   HEO_HERO_CATEGORY_1: { title: '博霖周刊', url: 'https://weekly.wbolyn.com/' },
   HEO_HERO_CATEGORY_2: { title: 'Bolyn Weekly', url: 'https://week.wbolyn.com/' },
-  HEO_HERO_CATEGORY_3: { title: 'GeophysicsHub', url: 'https://geophysics.icu' },
+  HEO_HERO_CATEGORY_3: { title: 'AI开发导航', url: 'https://aidevnav.com/' },
 
   // 英雄区右侧推荐文章标签, 例如 [推荐] , 最多六篇文章; 若留空白''，则推荐最近更新文章
   HEO_HERO_RECOMMEND_POST_TAG: '推荐',
@@ -48,7 +48,7 @@ const CONFIG = {
     '专修互联网与编程',
     'AIGC知识传道者',
     '业余马拉松爱好者',
-    '物理学在读博士',
+    '内容创作者',
     '独立开发者'
   ],
 
